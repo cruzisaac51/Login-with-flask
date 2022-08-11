@@ -1,0 +1,55 @@
+{% extends './base.html' %}
+
+
+{% block title %} Login {% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for("static", filename='css/login.css') }}" >
+{% endblock %}
+
+{% block body %} 
+<form class="form-signin" action="/login" method="POST">
+    <img class="mb-4" src="{{ url_for('static', filename='images/signup.svg') }}" alt="myself" width="122" height="107">
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br/>
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+    {% endwith %}
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="form-floating">
+      <input type="username" class="form-control" id="floatingInput" name="username" placeholder="username">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating">
+        <input type="fullname" class="form-control" id="floatingfullname" name="fullname" placeholder="fullname">
+        <label for="floatingfullname">Fullname</label>
+      </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+    <h3 class="h3 mb-3 fw-normal"><a href="../login ">Sign in instead</a></h3>
+    <p class="mt-5 mb-3 text-muted">&copy; Isaac Cruz</p>
+  </form>
+
+
+
+{% endblock %}
